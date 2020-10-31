@@ -63,7 +63,7 @@ export function  sendChargeMqttCom(url, topic, sendMsg, chargeState, setLoginSta
       const data = JSON.parse(msg.data);
       switch(data.msgId) {
         case 110:
-          setLoginState({...chargeState, chargeRate:data.chargeRate, power:data.power, voltage:data.voltage, current:data.current});
+          setLoginState({...chargeState, chargeRate:data.chargeRate+'%', power:data.power, voltage:data.voltage, current:data.current});
           break;
         case 111:
           console.log('login11', data.error)

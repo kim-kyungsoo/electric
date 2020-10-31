@@ -15,10 +15,9 @@ export default function HomeScreen({route, navigation}){
   return (
 
     <View style={{ flex: 1}}>
-      
-      <View style={{flex:2}}>
+       <View style={{flex:2}}>
       <HeaderMenu navigation={navigation}  />
-        <Text >현재시간: {currentDate}</Text>
+        <Text >현재시간: {CurrentDate()}</Text>
       </View >
       <View style={{flex:8,flexDirection:'row'}} >
         <View style={{flex:2}}>
@@ -28,7 +27,7 @@ export default function HomeScreen({route, navigation}){
             </View>
             <View   style = {{marginLeft:0, paddingBottom:3, width:80,height:30,  backgroundColor:'white',shadowColor: '#000',
             shadowOffset: { width: 0, height: 3 },shadowOpacity: 0.5}} >
-              <Text style={{marginLeft:10,marginTop:5, fontSize:13}}>{chargeState.chargeRate}%</Text> 
+              <Text style={{marginLeft:10,marginTop:5, fontSize:13}}>{chargeState.chargeRate}</Text> 
             </View>
    
           </View>
@@ -64,18 +63,9 @@ export default function HomeScreen({route, navigation}){
         </View>
         <View style={{flex:3}}>
           <View   style = {{marginLeft:80, paddingBottom:3, width:150,height:30,borderWidth:1}} >
-            <View style = {{marginLeft:0, width:chargeState.chargeRate, height:30,  backgroundColor:'grey'}}>
-            {/* <Text style={{marginLeft:0, marginTop:5, fontSize:13}}>충전중...  </Text>  */}
-            </View>
-          {/* <TextInput   style = {{marginLeft:80, paddingBottom:3, width:150,height:30,  borderWidth:1}} 
-              onChangeText= {text => {
-              // setLoginState({...loginState, phoneNumber:text,loginCheckResult:''});
-              // console.log('Login', loginState.phoneNumber);
-            }}>
-              
-          </TextInput> */}
+            <View style = {{marginLeft:0, width:chargeState.chargeRate, height:30,  backgroundColor:'blue'}}/>
           </View>
-           <Text style={{marginLeft:80, marginTop:5, fontSize:13}}>충전중...  </Text>  
+           <Text style={{marginLeft:100, marginTop:5, fontSize:13}}>{chargeState.chargeRate} 충전중...  </Text>  
           
           <TouchableHighlight style = {{marginTop:50, marginLeft:80, width:150,height:30, backgroundColor:'blue', borderWidth:1}}  
             onPress={() => {

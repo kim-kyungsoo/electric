@@ -1,21 +1,63 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useState} from 'react';
 import { Text, View, Button, StyleSheet,TouchableOpacity,TouchableHighlight  } from 'react-native';
+import * as RNLocalize from 'react-native-localize';
+import moment from 'moment-timezone';
+// const [timeToDisplay, setTimeToDisplay] = useState('');
 
 
 export function CurrentDate () {
+  const deviceTimeZone = RNLocalize.getTimeZone();
+  const today = moment().tz(deviceTimeZone);
+  const currentTimeZoneOffsetInHours = today.utcOffset() / 60;
+console.log('timezone, today, offset',deviceTimeZone,today,currentTimeZoneOffsetInHours );
+var date = new Date();
+var offsetInHours = date.getTimezoneOffset() / 60;
+console.log('offsetInHours',offsetInHours);
   var date = new Date().getDate(); //To get the Current Date
   var month = new Date().getMonth() + 1; //To get the Current Month
   var year = new Date().getFullYear(); //To get the Current Year
-  var hours = Number(new Date().getHours()+9); //To get the Current Hours
-  if( hours >=24){
-    hours =  hours-24;
-  }
+  var hours = Number(new Date().getHours()+currentTimeZoneOffsetInHours); //To get the Current Hours
+  
   var min = new Date().getMinutes(); //To get the Current Minutes
   var sec = new Date().getSeconds(); //To get the Current Seconds
   return  (year+'.'+month+'.'+date+'. '+hours+':'+min+':'+sec);
-}
+  // const backEndTimeStamp = '2001-04-11 10:00:00';
+  // const backEndTimeStamp = new Date().getDate(); 
 
+  // // get device timezone eg. -> "Asia/Shanghai"
+  // const deviceTimeZone = RNLocalize.getTimeZone();
+
+  // // Make moment of right now, using the device timezone
+  // const today = moment().tz(deviceTimeZone);
+
+  // // Get the UTC offset in hours
+  // const currentTimeZoneOffsetInHours = today.utcOffset() / 60;
+  // //const convertedToLocalTime = formatTimeByOffset(backEndTimeStamp,currentTimeZoneOffsetInHours);
+  // // setTimeToDisplay(convertedToLocalTime);
+  // return  convertedToLocalTime
+}
+export const formatTimeByOffset = (dateString, offset) => {
+  
+  if (!dateString) return ''
+  if (dateString.length === 0) return ''
+
+  const year = dateString.slice(0, 4)
+  const month = dateString.slice(5, 7)
+  const day = dateString.slice(8, 10)
+  const hour = dateString.slice(11, 13)
+  const minute = dateString.slice(14, 16)
+  const second = dateString.slice(17, 19)
+
+  const dateObject = new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`)
+  const currentHours = dateObject.getHours()
+  dateObject.setHours(currentHours + offset)
+  const newDateString = dateObject
+    .toISOString()
+    .replace('T', ' ')
+    .slice(0, 16)
+  return `${newDateString}`
+}
 
 export  function HeaderMenu(props) {
   
