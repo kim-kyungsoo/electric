@@ -32,7 +32,7 @@ def on_message(client, userdata, msg):
     print('received msg:'+str(msg.payload.decode("utf-8")))
     msgObj=json.loads(msg.payload)
     print('msgObj', msgObj);
-    client.publish('client965', msg.payload, 1);
+    client.publish('kksu965', msg.payload, 1);
     client_socket.sendall(msg.payload)  # 메시지를 전송합니다.
     print('send tcp/ip msg=', msg.payload)
     client_socket.close()
