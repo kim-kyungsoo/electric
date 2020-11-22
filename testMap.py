@@ -12,7 +12,10 @@ def on_connect(client, userdata, flags, rc):
     else:
         print("Bad connection Returned code=", rc)
 
-
+    sendMsg={'lat':36.396314, 'lng':127.352202}
+    #msg=json.dumps(sendMsg)
+    print('sendmsg', sendMsg)
+    client.publish('server965', json.dumps(sendMsg),1);
 
 
 def on_disconnect(client, userdata, flags, rc=0):
@@ -35,13 +38,13 @@ client.on_disconnect = on_disconnect
 client.on_subscribe = on_subscribe
 client.on_message = on_message
 
-client.connect('5.196.95.208', 1883) #test.mosquitto.org: 5.196.95.208, mqtt://broker.hivemq.com=18.185.228.239 and 3.120.11.85
+client.connect('18.185.228.239', 1883) #test.mosquitto.org: 5.196.95.208, mqtt://broker.hivemq.com=18.185.228.239 and 3.120.11.85
 #client.subscribe('server965', 1)
-client.loop_start()
-sendMsg={'lat':36.396314, 'lng':127.352202}
-msg=json.dumps(sendMsg)
-print('sendmsg', sendMsg,'msg', msg, msg.encode())
-client.publish('server9650', "Hello World",1);
-client.loop_start()
-client.disconnect()
-#client.loop_forever()
+#client.loop_start()
+# sendMsg={'lat':36.396314, 'lng':127.352202}
+# msg=json.dumps(sendMsg)
+# print('sendmsg', sendMsg,'msg', msg, msg.encode())
+# client.publish('server965', msg,1);
+#client.loop_stop()
+#client.disconnect()
+client.loop_forever()
