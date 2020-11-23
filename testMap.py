@@ -1,6 +1,7 @@
 # pip install paho-mqtt
 import paho.mqtt.client as mqtt
 import json
+import time
 #from mysqlText import *
 import socket
 HOST = '127.0.0.1'  #server address
@@ -16,6 +17,11 @@ def on_connect(client, userdata, flags, rc):
     #msg=json.dumps(sendMsg)
     print('sendmsg', sendMsg)
     client.publish('server965', json.dumps(sendMsg),1);
+    # time.sleep(2);
+    # sendMsg={'lat':36.391319, 'lng':127.346937}
+    # print('sendmsg', sendMsg)
+    # client.publish('server965', json.dumps(sendMsg), 1);
+
 
 
 def on_disconnect(client, userdata, flags, rc=0):
